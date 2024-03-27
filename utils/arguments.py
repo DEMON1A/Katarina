@@ -3,7 +3,7 @@ from argparse import Namespace
 
 def parse_command_arguments() -> Namespace:
     # Setup the main parser
-    parser = argparse.ArgumentParser(description="Katarina v0.0.0-beta, Your malware analysis and CTF basic toolkit!")
+    parser = argparse.ArgumentParser(description="Katarina v0.0.0-beta, Your malware analysis and CTF toolkit!")
     parser.add_argument('file', help='Path to your executable')
 
     # Subparsers
