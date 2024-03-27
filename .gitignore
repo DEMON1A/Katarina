@@ -1,0 +1,4 @@
+samples/malware.exe
+samples/setting.ini
+test.py
+utils/__pycache__/
