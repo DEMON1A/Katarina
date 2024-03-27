@@ -41,6 +41,18 @@ options:
   --basic-analysis    Get basic information about the PE headers
 ```
 
+#### Example usage
+```css
+E:\Projects\Python\katarina>python app.py samples\test.exe pe --extract-pdb-path
+2024-03-27 07:07:44.908 | INFO     | utils.analyzer:extract_pdb_path:52 - Found a PDP path C:\Users\tmcguff\source\repos\HelloWorld\HelloWorld\obj\x64\Release\HelloWorld.pdb
+2024-03-27 07:07:44.909 | SUCCESS  | utils.analyzer:extract_pdb_path:55 - Found a windows user: tmcguff, Detection method: PDB file path
+```
+
+```css
+E:\Projects\Python\katarina>python app.py samples\test.exe pe --entry-address
+2024-03-27 07:08:20.102 | INFO     | utils.analyzer:get_entry_point:12 - Entry address: 0x0
+```
+
 ### STRINGS
 ```css
 E:\Projects\Python\katarina>python app.py samples\test.exe strings -h
@@ -58,6 +70,24 @@ options:
                         Search for a specific string inside of the executable using regex
 ```
 
+#### Example usage
+```css
+E:\Projects\Python\katarina>python app.py samples\test.exe strings --regex-search .*\.exe
+2024-03-27 07:05:35.792 | SUCCESS  | utils.strings:search_with_regex:52 - Found a match: HelloWorld.exe
+```
+
+```css
+E:\Projects\Python\katarina>python app.py samples\test.exe strings --search hello
+2024-03-27 07:06:27.422 | SUCCESS  | utils.strings:search_for_string:45 - Found a match: HelloWorld
+2024-03-27 07:06:27.423 | SUCCESS  | utils.strings:search_for_string:45 - Found a match: HelloWorld.exe
+2024-03-27 07:06:27.423 | SUCCESS  | utils.strings:search_for_string:45 - Found a match: HelloWorld
+2024-03-27 07:06:27.424 | SUCCESS  | utils.strings:search_for_string:45 - Found a match: C:\Users\tmcguff\source\repos\HelloWorld\HelloWorld\obj\x64\Release\HelloWorld.pdb
+```
+
+```css
+E:\Projects\Python\katarina>python app.py samples\test.exe strings --extract-paths
+2024-03-27 07:07:06.329 | SUCCESS  | utils.strings:extract_windows_paths:33 - Found a windows path: C:\Users\tmcguff\source\repos\HelloWorld\HelloWorld\obj\x64\Release\HelloWorld.pdb
+```
 
 ### ASM
 ```css
@@ -75,3 +105,16 @@ options:
                         How many instructions to show after the selected address
 ```
 
+#### Example usage
+```css
+E:\Projects\Python\katarina>python app.py samples\test.exe asm --address 0x40bd --before 2 --after 4
+
+Disassembly of section .rsrc:
+0x40b7: add     byte ptr [rbp + 0xfeef04], bh
+0x40bd: add     byte ptr [rcx], al
+0x40bf: add     byte ptr [rax], al
+0x40c1: add     byte ptr [rcx], al
+0x40c3: add     byte ptr [rax], al
+0x40c5: add     byte ptr [rax], al
+0x40c7: add     byte ptr [rax], al
+```
